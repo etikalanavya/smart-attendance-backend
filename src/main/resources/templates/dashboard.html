@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4ff;
+            margin: 0;
+            color: #24324a;
+        }
+        header {
+            background: #2347a5;
+            color: white;
+            padding: 22px;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #d5dcec;
+            text-align: center;
+        }
+        .card h2 { color: #2347a5; }
+        .card p { color: #64748b; }
+        a {
+            display: inline-block;
+            background: #2347a5;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Smart Attendance System</h1>
+        <p>Admin Dashboard</p>
+    </header>
+
+    <div class="container">
+        <h2>Welcome to your Dashboard!</h2>
+        <p>Select a section to get started.</p>
+
+        <div class="cards">
+            <div class="card">
+                <h2>Students</h2>
+                <p>Manage student details.</p>
+                <a href="/students">View Students</a>
+            </div>
+
+            <div class="card">
+                <h2>Attendance</h2>
+                <p>Record daily attendance.</p>
+                <a href="/attendance">Mark Attendance</a>
+            </div>
+
+            <div class="card">
+                <h2>Reports</h2>
+                <p>Check attendance records.</p>
+                <a href="/reports">View Reports</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

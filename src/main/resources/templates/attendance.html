@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mark Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background: #f4f6f9;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 450px;
+            margin-bottom: 25px;
+        }
+        input, select, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Mark Attendance</h2>
+
+        <form th:action="@{/attendance/save}"
+              th:object="${attendance}" method="post">
+
+            <label>Student Name</label>
+            <input type="text" th:field="*{studentName}"
+                   placeholder="Enter student name" required>
+
+            <label>Roll Number</label>
+            <input type="text" th:field="*{rollNumber}"
+                   placeholder="Enter roll number" required>
+
+            <label>Date</label>
+            <input type="date" th:field="*{date}" required>
+
+            <label>Status</label>
+            <select th:field="*{status}" required>
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+            </select>
+
+            <button type="submit">Save Attendance</button>
+        </form>
+
+        <p><a href="/dashboard">Back to Dashboard</a></p>
+    </div>
+
+    <h2>Attendance Records</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Roll Number</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="record : ${records}">
+                <td th:text="${record.studentName}"></td>
+                <td th:text="${record.rollNumber}"></td>
+                <td th:text="${record.date}"></td>
+                <td th:text="${record.status}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

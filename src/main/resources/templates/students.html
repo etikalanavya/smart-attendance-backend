@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4ff;
+            margin: 0;
+            padding: 25px;
+            color: #24324a;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #d5dcec;
+        }
+        input, button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        input { border: 1px solid #ccc; }
+        button {
+            background: #2347a5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th { background: #e4ecff; }
+        .message { color: #16834a; }
+        a { color: #2347a5; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Student Management</h1>
+    <p><a href="/dashboard">← Back to Dashboard</a></p>
+
+    <p class="message" th:text="${message}"></p>
+
+    <h2>Register Student</h2>
+    <form action="/students/add" method="post">
+        <input type="text" name="rollNumber"
+               placeholder="Roll Number" required>
+        <input type="text" name="name"
+               placeholder="Student Name" required>
+        <input type="text" name="department"
+               placeholder="Department (e.g. ECE)" required>
+        <button type="submit">Add Student</button>
+    </form>
+
+    <h2>Registered Students</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Roll Number</th>
+            <th>Name</th>
+            <th>Department</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.rollNumber}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.department}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

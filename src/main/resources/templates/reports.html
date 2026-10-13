@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Reports</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 30px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+        }
+
+        .summary {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .box {
+            padding: 18px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .total { background: #dbeafe; }
+        .present { background: #dcfce7; }
+        .absent { background: #fee2e2; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #1e40af;
+            color: white;
+        }
+
+        .actions {
+            margin: 20px 0;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            margin-right: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        @media print {
+            body { background: white; margin: 0; }
+            .actions, .back { display: none; }
+            .container { padding: 0; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Attendance Reports</h1>
+    <p>Smart Attendance Management System</p>
+
+    <div class="summary">
+        <div class="box total">
+            <h3>Total Records</h3>
+            <h2 th:text="${records.size()}">0</h2>
+        </div>
+
+        <div class="box present">
+            <h3>Present</h3>
+            <h2 th:text="${records.?[status == 'Present'].size()}">0</h2>
+        </div>
+
+        <div class="box absent">
+            <h3>Absent</h3>
+            <h2 th:text="${records.?[status == 'Absent'].size()}">0</h2>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Roll Number</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="record : ${records}">
+                <td th:text="${record.studentName}"></td>
+                <td th:text="${record.rollNumber}"></td>
+                <td th:text="${record.date}"></td>
+                <td th:text="${record.status}"></td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(records)}">
+                <td colspan="4">No attendance records available.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="back" href="/dashboard">Back to Dashboard</a>
+
+</div>
+</body>
+</html>
